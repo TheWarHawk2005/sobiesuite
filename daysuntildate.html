@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Days Until Date</title>
+		<style>
+			body {
+				background-color: #ddfedf;
+				color: #3f5541;
+				font-family:Arial, Helvetica, sans-serif;
+				padding: 1%;
+			}
+			h1,h3{
+				color: #3f5541;
+			}
+			label {
+				display: block;
+			}
+			input {
+				font-size: medium;
+				background-color:#ffffff;
+				color: #3f5541;
+				margin: 1% 0% 1% 0%;
+				height: 30px;
+				width: 80%;
+				border-radius: 5px;
+				border-color: #C4EBC8;
+				border-style: solid;
+				border-width: 5px;
+			}
+
+
+		</style>
+	</head>
+
+	<body>
+		<h1>Get Days until Date</h1>
+
+		<form id="inputsForm" onsubmit="getDays();return false">
+			<label for="date1">Date One:</label>
+			<input id="date1"
+				type="date" 
+				onchange="getDays()"
+			>
+
+			<label for="date2">Date Two:</label>
+			<input id="date2"
+				type="date" 
+				onchange="getDays()"
+				autofocus="true"
+			>
+		</form>
+
+		<h3 id="result">Result</h3>
+	</body>
+
+	<script>
+		window.onload = function() {
+			assignValues()
+			getDays()
+		}
+
+		function assignValues() {
+			var todaydate = new Date().toJSON().slice(0, 10)
+			document.getElementById("date1").value = todaydate
+			document.getElementById("date2").value = todaydate
+		}
+
+		function getDays() {
+			var date1 = new Date(document.getElementById("date1").value)
+			var date2 = new Date(document.getElementById("date2").value)
+
+			var time_difference = date2.getTime() - date1.getTime()
+			var result = Math.abs(time_difference / (1000 * 60 * 60 * 24))
+
+			document.getElementById("result").innerHTML = `${result} days between dates`
+		}
+	</script>
+</html>
