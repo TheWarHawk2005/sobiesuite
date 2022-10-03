@@ -1,12 +1,33 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<title>Sobie Suite</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<style>
+			body {
+				font-family:Arial, Helvetica, sans-serif;
+				padding: 1%;
+			}
 			h1 {
 				color: #000000;
 			}
 			h3 {
 				color: #4a4a4a
+			}
+			button {
+				height: 100px;
+				width: 100px;
+				border-style: none;
+				border-radius: 5px;
+				margin: 1%;
+			}
+			#daysUntilDate {
+				background-color: #C4EBC8;
+				color:#3f5541 ;
+			}
+			#calculateSRP {
+				background-color: #c286a7;
+				color:#5C0029 ;
 			}
 		</style>
 	</head>
@@ -15,7 +36,7 @@
 		<h1>Sobie Suite</h1>
 		<h3>A private collection of tools to streamline workflows at Sobie Meats</h3>
 
-		<button>Days until Date</button>
-		<button onclick="window.location.href='./calculatesrp.html';">Calculate SRP</button>
+		<button id="daysUntilDate" onclick="window.location.href='./daysuntildate.html';"><b>Days until Date</b></button>
+		<button id="calculateSRP" onclick="window.location.href='./calculatesrp.html';"><b>Calculate SRP</b></button>
 	</body>
 </html>
