@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			input {
+				font-size: medium;
+			}
+		</style>
+	</head>
+
+	<body>
+		<h1>Calculate Suggested Retail Price</h1>
+
+		<form onsubmit="calculateCost();return false">
+			<input id="MinimumProfit"
+				placeholder="Minimum Profit"
+				type="number" 
+    			inputmode="integer" 
+   				min="1"
+				max="100"
+				onchange="calculateCost()"
+			>
+			<input id="CostPerCase"
+				placeholder="Cost/Case"
+				type="number" 
+    			inputmode="decimal" 
+   				min="0" 
+   				step=".01"
+				onchange="calculateCost()"
+			>
+			<input id="NumberOfItems"
+				placeholder="Items/Case"
+				type="number" 
+				inputmode="decimal" 
+				min="0" 
+				step="1"
+				onchange="calculateCost()"
+			>
+			<input type="reset" value="Next">
+		</form>
+
+		<p id="Result">Result</p>
+	</body>
+
+	<script>
+		function divideMoney(amount, divideBy, significantDecimals = 2) { //https://medium.com/swlh/working-with-currency-in-javascript-4180172a4630
+    		const precision = Math.pow(10, significantDecimals);
+			const result = multiplyMoney(amount, 1 / divideBy, significantDecimals);
+			const remainder = ((amount * precision) % (result * precision)) / precision;
+			return [result, remainder];
+		};
+
+		function calculateCost() {
+			var costpercase = document.getElementById("CostPerCase").value
+			var numberofitems = document.getElementById("NumberOfItems").value
+			var profit = document.getElementById("MinimumProfit").value
+
+			var costperitem = divideMoney(costpercase,numberofitems,2)
+			var pricewithprofit = divideMoney(costperitem[0], (100-profit)*0.01)[0] //calculate price up to 2 decimal places
+			var srp = pricewithprofit.toString()
+			var decimal = srp.split('.').pop()
+			if (decimal.length < 2) {srp = srp + "0"} //ensure there are both decimal places
+			srp = srp.replace(/.$/,"9") // replace hundreth's place with a '9'
+			console.log(`Price with profit: ${pricewithprofit}, SRP: ${srp}`)
+			
+			if (isNaN(pricewithprofit) || pricewithprofit == "Infinity") {
+				document.getElementById("Result").innerHTML = `Result`
+			} else {
+				document.getElementById("Result").innerHTML = `${pricewithprofit} , ${srp}`
+			}
+		}
+	</script>
+</html>
