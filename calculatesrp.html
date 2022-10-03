@@ -33,7 +33,7 @@
 		<h1>Calculate Suggested Retail Price</h1>
 
 		<form id="inputsForm" onsubmit="calculateCost();return false">
-			<label for="MinimumProfit">Minimum Profit</label>
+			<label for="MinimumProfit">Minimum % Profit</label>
 			<input id="MinimumProfit"
 				type="number" 
     			inputmode="numberic" 
@@ -93,7 +93,7 @@
 			if (isNaN(pricewithprofit) || pricewithprofit == "Infinity") {
 				document.getElementById("Result").innerHTML = `Result`
 			} else {
-				document.getElementById("Result").innerHTML = `${pricewithprofit} , ${srp}`
+				document.getElementById("Result").innerHTML = `With ${profit}% profit: ${pricewithprofit}<br>SRP: ${srp}`
 			}
 		}
 	</script>
